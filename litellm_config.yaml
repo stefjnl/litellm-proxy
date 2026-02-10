@@ -17,6 +17,13 @@ model_list:
       api_base: https://nano-gpt.com/api/v1
       api_key: os.environ/NANOGPT_API_KEY
 
+  # Kimi K2.5
+  - model_name: kimi-k2.5
+    litellm_params:
+      model: openai/moonshotai/kimi-k2.5
+      api_base: https://nano-gpt.com/api/v1
+      api_key: os.environ/NANOGPT_API_KEY
+
 litellm_settings:
   set_verbose: false
   drop_params: true
