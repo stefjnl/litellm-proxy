@@ -3,17 +3,17 @@
 # Docs: https://docs.litellm.ai/docs/proxy/configs
 
 model_list:
-  # GLM-4.7
-  - model_name: glm-4.7
+  # GLM-5
+  - model_name: glm-5
     litellm_params:
-      model: openai/zai-org/glm-4.7
+      model: openai/zai-org/glm-5
       api_base: https://nano-gpt.com/api/v1
       api_key: os.environ/NANOGPT_API_KEY
 
-  # MiniMax M2.1
-  - model_name: minimax-m2.1
+  # MiniMax M2.5
+  - model_name: minimax-m2.5
     litellm_params:
-      model: openai/minimax/minimax-m2.1
+      model: openai/minimax/minimax-m2.5-official
       api_base: https://nano-gpt.com/api/v1
       api_key: os.environ/NANOGPT_API_KEY
 
