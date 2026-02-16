@@ -3,6 +3,13 @@
 # Docs: https://docs.litellm.ai/docs/proxy/configs
 
 model_list:
+  # Qwen 3.5 (default)
+  - model_name: qwen3.5
+    litellm_params:
+      model: openai/qwen/qwen3.5-397b-a17b
+      api_base: https://nano-gpt.com/api/v1
+      api_key: os.environ/NANOGPT_API_KEY
+
   # GLM-5
   - model_name: glm-5
     litellm_params:
@@ -27,6 +34,7 @@ model_list:
 litellm_settings:
   set_verbose: false
   drop_params: true
+  default_model: qwen3.5
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
