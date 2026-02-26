@@ -11,9 +11,12 @@ Standalone LiteLLM proxy service running as a Docker container. Acts as a unifie
 - **No application code** — this is a config-only repo (Docker Compose + LiteLLM YAML config + env vars)
 - **LiteLLM image**: `docker.litellm.ai/berriai/litellm:main-latest` (pulled from LiteLLM's registry)
 - **Proxy listens on port 4000**, exposed to host
-- **All models route through NanoGPT** (`https://nano-gpt.com/api/v1`) using the `openai/` provider prefix
-- **Auth**: Clients authenticate with `LITELLM_MASTER_KEY`; proxy authenticates upstream with `NANOGPT_API_KEY`
-- **Default model**: `qwen3.5` — used when no model is specified in the request
+- **Two upstream routes**:
+  - **NanoGPT** (`https://nano-gpt.com/api/v1`) — cloud models using `openai/` provider prefix, authenticated with `NANOGPT_API_KEY`
+  - **Local** (`http://100.74.43.85:8080/v1`) — self-hosted model on Azerty via Tailscale, no API key
+- **Auth**: Clients authenticate with `LITELLM_MASTER_KEY`
+- **Default model**: `qwen3.5-local` — routes to local Qwen 3.5 35B-A3B instance
+- **Fallback**: `qwen3.5-local` → `qwen3.5` (cloud) — if local is unreachable, automatically falls back to NanoGPT
 - **No database** — runs stateless with `allow_requests_on_db_unavailable: true`
 
 ## Commands
@@ -35,12 +38,13 @@ curl http://localhost:4000/health
 curl http://localhost:4000/v1/chat/completions \
   -H "Authorization: Bearer sk-local-dev-key" \
   -H "Content-Type: application/json" \
-  -d '{"model": "qwen3.5", "messages": [{"role": "user", "content": "hello"}]}'
+  -d '{"model": "qwen3.5-local", "messages": [{"role": "user", "content": "hello"}]}'
 ```
 
 ## Current Models
 
-Chat: `qwen3.5` (default), `glm-5`, `minimax-m2.5`, `kimi-k2.5`
+Local: `qwen3.5-local` (default) — Qwen 3.5 35B-A3B on Azerty via Tailscale
+Cloud (NanoGPT): `qwen3.5` (cloud fallback), `glm-5`, `minimax-m2.5`, `kimi-k2.5`
 Embedding: `qwen3-embedding`
 
 ## Adding a New Model

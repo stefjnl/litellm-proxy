@@ -3,7 +3,7 @@
 # Docs: https://docs.litellm.ai/docs/proxy/configs
 
 model_list:
-  # Qwen 3.5 (default)
+  # Qwen 3.5 (Cloud Fallback)
   - model_name: qwen3.5
     litellm_params:
       model: openai/qwen/qwen3.5-397b-a17b
@@ -31,7 +31,7 @@ model_list:
       api_base: https://nano-gpt.com/api/v1
       api_key: os.environ/NANOGPT_API_KEY
   
-# Qwen3 Embedding 4B
+  # Qwen3 Embedding 4B
   - model_name: qwen3-embedding
     litellm_params:
       model: openai/Qwen/Qwen3-Embedding-4B
@@ -39,13 +39,15 @@ model_list:
       api_key: os.environ/NANOGPT_API_KEY
       encoding_format: float
 
-  # Qwen 3.5 35B-A3B (local, Azerty via Tailscale)
+  # Qwen 3.5 35B-A3B (Local, Azerty via Tailscale)
   - model_name: qwen3.5-local
     litellm_params:
       model: openai/qwen3.5-35b-a3b
       api_base: http://100.74.43.85:8080/v1
       api_key: none
 
+router_settings:
+  fallbacks: [{"qwen3.5-local": ["qwen3.5"]}]
 
 litellm_settings:
   set_verbose: false
