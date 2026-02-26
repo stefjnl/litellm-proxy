@@ -39,10 +39,18 @@ model_list:
       api_key: os.environ/NANOGPT_API_KEY
       encoding_format: float
 
+  # Qwen 3.5 35B-A3B (local, Azerty via Tailscale)
+  - model_name: qwen3.5-local
+    litellm_params:
+      model: openai/qwen3.5-35b-a3b
+      api_base: http://100.74.43.85:8080/v1
+      api_key: none
+
+
 litellm_settings:
   set_verbose: false
   drop_params: true
-  default_model: qwen3.5
+  default_model: qwen3.5-local
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
