@@ -31,12 +31,13 @@ model_list:
       api_base: https://nano-gpt.com/api/v1
       api_key: os.environ/NANOGPT_API_KEY
   
-  # Qwen3 Embedding 4B
+# Qwen3 Embedding 4B
   - model_name: qwen3-embedding
     litellm_params:
       model: openai/Qwen/Qwen3-Embedding-4B
       api_base: https://nano-gpt.com/api/v1
       api_key: os.environ/NANOGPT_API_KEY
+      encoding_format: float
 
 litellm_settings:
   set_verbose: false
