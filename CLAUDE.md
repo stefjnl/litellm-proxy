@@ -13,6 +13,7 @@ Standalone LiteLLM proxy service running as a Docker container. Acts as a unifie
 - **Proxy listens on port 4000**, exposed to host
 - **All models route through NanoGPT** (`https://nano-gpt.com/api/v1`) using the `openai/` provider prefix
 - **Auth**: Clients authenticate with `LITELLM_MASTER_KEY`; proxy authenticates upstream with `NANOGPT_API_KEY`
+- **Default model**: `qwen3.5` — used when no model is specified in the request
 - **No database** — runs stateless with `allow_requests_on_db_unavailable: true`
 
 ## Commands
@@ -34,8 +35,13 @@ curl http://localhost:4000/health
 curl http://localhost:4000/v1/chat/completions \
   -H "Authorization: Bearer sk-local-dev-key" \
   -H "Content-Type: application/json" \
-  -d '{"model": "glm-4.7", "messages": [{"role": "user", "content": "hello"}]}'
+  -d '{"model": "qwen3.5", "messages": [{"role": "user", "content": "hello"}]}'
 ```
+
+## Current Models
+
+Chat: `qwen3.5` (default), `glm-5`, `minimax-m2.5`, `kimi-k2.5`
+Embedding: `qwen3-embedding`
 
 ## Adding a New Model
 
