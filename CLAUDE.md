@@ -44,7 +44,7 @@ curl http://localhost:4000/v1/chat/completions \
 ## Current Models
 
 Local: `qwen3.5-local` (default) — Qwen 3.5 35B-A3B on Azerty via Tailscale
-Cloud (NanoGPT): `qwen3.5` (cloud fallback), `glm-5`, `minimax-m2.5`, `kimi-k2.5`
+Cloud (NanoGPT): `qwen3.5` (cloud fallback), `qwen3.5-122b`, `glm-5`, `minimax-m2.5`, `kimi-k2.5`
 Embedding: `qwen3-embedding`
 
 ## Adding a New Model
