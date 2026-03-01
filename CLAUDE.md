@@ -49,12 +49,17 @@ Embedding: `qwen3-embedding`
 
 ## Adding a New Model
 
-Add an entry to `litellm_config.yaml` under `model_list`:
+When the user says "add <model-name>", use the NanoGPT model ID directly — don't ask for it. NanoGPT model IDs are visible in their benchmark UI and match the pattern used in `litellm_config.yaml`. Use the model ID as-is for `model_name` (strip any provider prefix like `qwen/` for the friendly name).
+
+Steps:
+1. Add entry to `litellm_config.yaml` under `model_list`
+2. Update the "Current Models" section in this file
+3. Commit and push
 
 ```yaml
-- model_name: <friendly-name>        # Name clients use
+- model_name: <friendly-name>        # Name clients use (typically the model ID itself)
   litellm_params:
-    model: openai/<provider>/<model>  # NanoGPT model path
+    model: openai/<nanogpt-model-id>  # NanoGPT model ID as-is
     api_base: https://nano-gpt.com/api/v1
     api_key: os.environ/NANOGPT_API_KEY
 ```
